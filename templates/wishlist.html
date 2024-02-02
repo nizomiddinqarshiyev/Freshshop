@@ -69,78 +69,40 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="thumbnail-img">
-                                        <a href="#">
-									<img class="img-fluid" src="{% static 'images/img-pro-01.jpg' %}" alt="" />
-								</a>
-                                    </td>
-                                    <td class="name-pr">
-                                        <a href="#">
-									Lorem ipsum dolor sit amet
-								</a>
-                                    </td>
-                                    <td class="price-pr">
-                                        <p>$ 80.0</p>
-                                    </td>
-                                    <td class="quantity-box">In Stock</td>
-                                    <td class="add-pr">
-                                        <a class="btn hvr-hover" href="#">Add to Cart</a>
-                                    </td>
-                                    <td class="remove-pr">
-                                        <a href="#">
-									<i class="fas fa-times"></i>
-								</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="thumbnail-img">
-                                        <a href="#">
-									<img class="img-fluid" src="{% static 'images/img-pro-02.jpg' %}" alt="" />
-								</a>
-                                    </td>
-                                    <td class="name-pr">
-                                        <a href="#">
-									Lorem ipsum dolor sit amet
-								</a>
-                                    </td>
-                                    <td class="price-pr">
-                                        <p>$ 60.0</p>
-                                    </td>
-                                    <td class="quantity-box">In Stock</td>
-                                    <td class="add-pr">
-                                        <a class="btn hvr-hover" href="#">Add to Cart</a>
-                                    </td>
-                                    <td class="remove-pr">
-                                        <a href="#">
-									<i class="fas fa-times"></i>
-								</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="thumbnail-img">
-                                        <a href="#">
-									<img class="img-fluid" src="{% static 'images/img-pro-03.jpg' %}" alt="" />
-								</a>
-                                    </td>
-                                    <td class="name-pr">
-                                        <a href="#">
-									Lorem ipsum dolor sit amet
-								</a>
-                                    </td>
-                                    <td class="price-pr">
-                                        <p>$ 30.0</p>
-                                    </td>
-                                    <td class="quantity-box">In Stock</td>
-                                    <td class="add-pr">
-                                        <a class="btn hvr-hover" href="#">Add to Cart</a>
-                                    </td>
-                                    <td class="remove-pr">
-                                        <a href="#">
-									<i class="fas fa-times"></i>
-								</a>
-                                    </td>
-                                </tr>
+                                {% for product in  wishlist%}
+                                    <tr>
+                                        <div id = "{{ product.id }}">
+                                            <td class="thumbnail-img">
+                                                <a href="#">
+                                                    <img class="img-fluid" src="{{ product.image.image.url }}" alt="" />
+                                                </a>
+                                            </td>
+                                            <td class="name-pr">
+                                                <a href="#">
+                                                    {{ product.name }}
+                                                </a>
+                                            </td>
+                                            <td class="price-pr">
+                                                <p>$ {{ product.price }}</p>
+                                            </td>
+                                            <td class="quantity-box">
+                                                {% if product.is_stock%}
+                                                    In stock
+                                                {% else %}
+                                                    Not in stock
+                                                {% endif %}
+                                            </td>
+                                            <td class="add-pr">
+                                                <a class="btn hvr-hover" href="#">Add to Cart</a>
+                                            </td>
+                                            <td class="remove-pr">
+                                                <a href="#">
+                                                    <i class="fas fa-times"></i>
+                                                </a>
+                                            </td>
+                                        </div>
+                                    </tr>
+                                {% endfor %}
                             </tbody>
                         </table>
                     </div>
@@ -167,4 +129,19 @@
     <script src="{% static 'js/form-validator.min.js' %}"></script>
     <script src="{% static 'js/contact-form-script.js' %}"></script>
     <script src="{% static 'js/custom.js' %}"></script>
+    <script>
+        const add_to_cart = (id) => {
+            fetch('http://localhost:8000/add_cart', {
+                method: 'DELETE',
+                headers:{
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    'product_id': id,
+                })
+            }).then(rsp=>rsp.json()).then(response=>{
+                console.log(response)
+            })
+        }
+    </script>
 {% endblock %}

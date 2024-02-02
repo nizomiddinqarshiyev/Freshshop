@@ -166,17 +166,17 @@
                 <li class="cart-box">
                     <ul class="cart-list">
                         <li>
-                            <a href="#" class="photo"><img src="{% static 'images/img-pro-01.jpg' %}" class="cart-thumb" alt="" /></a>
+                            <a href="#" class="photo"><img src="{% static 'images/img-pro/img-pro-01.jpg' %}" class="cart-thumb" alt="" /></a>
                             <h6><a href="#">Delica omtantur </a></h6>
                             <p>1x - <span class="price">$80.00</span></p>
                         </li>
                         <li>
-                            <a href="#" class="photo"><img src="{% static 'images/img-pro-02.jpg' %}" class="cart-thumb" alt="" /></a>
+                            <a href="#" class="photo"><img src="{% static 'images/img-pro/img-pro-02.jpg' %}" class="cart-thumb" alt="" /></a>
                             <h6><a href="#">Omnes ocurreret</a></h6>
                             <p>1x - <span class="price">$60.00</span></p>
                         </li>
                         <li>
-                            <a href="#" class="photo"><img src="{% static 'images/img-pro-03.jpg' %}" class="cart-thumb" alt="" /></a>
+                            <a href="#" class="photo"><img src="{% static 'images/img-pro/img-pro-03.jpg' %}" class="cart-thumb" alt="" /></a>
                             <h6><a href="#">Agam facilisis</a></h6>
                             <p>1x - <span class="price">$40.00</span></p>
                         </li>
@@ -201,7 +201,7 @@
         <div class="main-instagram owl-carousel owl-theme">
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="{% static 'images/instagram-img-01.jpg' %}" alt="" />
+                    <img src="{% static 'images/instagram/instagram-img-01.jpg' %}" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -209,7 +209,7 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="{% static 'images/instagram-img-02.jpg' %}" alt="" />
+                    <img src="{% static 'images/instagram/instagram-img-02.jpg' %}" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -217,7 +217,7 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="{% static 'images/instagram-img-03.jpg' %}" alt="" />
+                    <img src="{% static 'images/instagram/instagram-img-03.jpg' %}" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -225,7 +225,7 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="{% static 'images/instagram-img-04.jpg' %}" alt="" />
+                    <img src="{% static 'images/instagram/instagram-img-04.jpg' %}" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -233,7 +233,7 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="{% static 'images/instagram-img-05.jpg' %}" alt="" />
+                    <img src="{% static 'images/instagram/instagram-img-05.jpg' %}" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -241,7 +241,7 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="{% static 'images/instagram-img-06.jpg' %}" alt="" />
+                    <img src="{% static 'images/instagram/instagram-img-06.jpg' %}" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -249,7 +249,7 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="{% static 'images/instagram-img-07.jpg' %}" alt="" />
+                    <img src="{% static 'images/instagram/instagram-img-07.jpg' %}" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -257,7 +257,7 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="{% static 'images/instagram-img-08.jpg' %}" alt="" />
+                    <img src="{% static 'images/instagram/instagram-img-08.jpg' %}" alt="" />
                     <div class="hov-in">
                         <a href="https://www.instagram.com/p/Cw7sCJZq93k/"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -265,7 +265,7 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="{% static 'images/instagram-img-09.jpg' %}" alt="" />
+                    <img src="{% static 'images/instagram/instagram-img-09.jpg' %}" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -273,7 +273,7 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="{% static 'images/instagram-img-05.jpg' %}" alt="" />
+                    <img src="{% static 'images/instagram/instagram-img-05.jpg' %}" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -300,12 +300,13 @@
 					<div class="col-lg-4 col-md-12 col-sm-12">
 						<div class="footer-top-box">
 							<h3>Newsletter</h3>
-							<form class="newsletter-box">
+							<form class="newsletter-box" method="POST">
+                                {% csrf_token %}
 								<div class="form-group">
-									<input class="" type="email" name="Email" placeholder="Email Address*" />
+									<input class="" id="email" type="email" name="Email" placeholder="Email Address*" required=""/>
 									<i class="fa fa-envelope"></i>
 								</div>
-								<button class="btn hvr-hover" type="submit">Submit</button>
+								<button class="btn hvr-hover" onclick=subscribe() type="submit">Submit</button>
 							</form>
 						</div>
 					</div>
@@ -381,6 +382,22 @@
 
     {% block js %}
     {% endblock %}
+    <script>
+        const subscribe = () => {
+            let email = document.getElementById('email').value
+            fetch('http://localhost:8000/subscribe', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    'email': email
+                })
+            }).then(rsp => rsp.json()).then(response => {
+                console.log(response)
+            })
+        }
+    </script>
 
 
 
