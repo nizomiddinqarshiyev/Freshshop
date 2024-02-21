@@ -25,7 +25,7 @@ urlpatterns = [
     path('decrement', csrf_exempt(DecrementCountAPIView.as_view()), name='decrement'),
     path('change', csrf_exempt(ChangeCountAPIView.as_view()), name='change'),
     path('subscribe', csrf_exempt(SubscribeAPIView.as_view()), name='subscribe'),
-    path('add_cart', csrf_exempt(AddToCartAPIView.as_view()), name='add_to_cart')
+    path('add_cart', csrf_exempt(AddToCartAPIView.as_view()), name='add_cart')
 ]
 
 

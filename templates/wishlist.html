@@ -60,6 +60,7 @@
                         <table class="table">
                             <thead>
                                 <tr>
+                                    <th>Id</th>
                                     <th>Images</th>
                                     <th>Product Name</th>
                                     <th>Unit Price </th>
@@ -69,9 +70,13 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            {% if user.is_authenticated %}
                                 {% for product in  wishlist%}
                                     <tr>
                                         <div id = "{{ product.id }}">
+                                            <td class="id">
+                                                {{ product.id }}
+                                            </td>
                                             <td class="thumbnail-img">
                                                 <a href="#">
                                                     <img class="img-fluid" src="{{ product.image.image.url }}" alt="" />
@@ -92,8 +97,14 @@
                                                     Not in stock
                                                 {% endif %}
                                             </td>
+
                                             <td class="add-pr">
-                                                <a class="btn hvr-hover" href="#">Add to Cart</a>
+{#                                                <form method="POST">#}
+                                                    {% csrf_token %}
+{#                                                    <div>#}
+                                                        <button class="btn hvr-hover w" onclick=add_cart({{ product.id }})>Add to Cart</button>
+{#                                                    </div>#}
+{#                                                </form>#}
                                             </td>
                                             <td class="remove-pr">
                                                 <a href="#">
@@ -103,6 +114,7 @@
                                         </div>
                                     </tr>
                                 {% endfor %}
+                            {% endif %}
                             </tbody>
                         </table>
                     </div>
@@ -129,19 +141,5 @@
     <script src="{% static 'js/form-validator.min.js' %}"></script>
     <script src="{% static 'js/contact-form-script.js' %}"></script>
     <script src="{% static 'js/custom.js' %}"></script>
-    <script>
-        const add_to_cart = (id) => {
-            fetch('http://localhost:8000/add_cart', {
-                method: 'DELETE',
-                headers:{
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    'product_id': id,
-                })
-            }).then(rsp=>rsp.json()).then(response=>{
-                console.log(response)
-            })
-        }
-    </script>
+    <script src="{% static 'js/j.js' %}"></script>
 {% endblock %}

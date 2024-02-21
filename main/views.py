@@ -162,18 +162,24 @@ class WishListView(View):
     context = {}
 
     def get(self, request):
-        user = request.user
-        wishlist = Wishlist.objects.filter(user=user)
-        product_data = []
-        for w in wishlist:
-            product = Product.objects.get(id=w.product_id)
-            image = Image.objects.filter(product=product).first()
-            product.image = image
-            product.is_stock = w.is_stock
-            product_data.append(product)
-        self.context.update({'wishlist': product_data})
-        return render(request, self.template_name, self.context)
-
+        try:
+            user = request.user
+            wishlist = Wishlist.objects.filter(user=user)
+            if wishlist is not None:
+                product_data = []
+                for w in wishlist:
+                    product = Product.objects.get(id=w.product_id)
+                    image = Image.objects.filter(product=product).first()
+                    product.image = image
+                    product.is_stock = w.is_stock
+                    product_data.append(product)
+                self.context.update({'wishlist': product_data})
+                return render(request, self.template_name, self.context)
+            else:
+                self.context.update({'wishlist': None})
+                return render({request, self.template_name, self.context})
+        except Exception as e:
+            return render(request, self.template_name, self.context)
 
 # Create your views here.
 
@@ -202,18 +208,37 @@ class SubscribeAPIView(View):
 
 class AddToCartAPIView(View):
 
-    def post(self, request, product_id, count):
-        if not request.user.is_authenticated:
-            return JsonResponse('Not logged in', status=401)
-        else:
-            product = Product.objects.get(id=product_id)
-            cart = ProductCart.objects.create(
-                product=product,
-                user=request.user,
-                count=count if count > 0 else 1
-            )
-            cart.save()
-            return JsonResponse({'message': 'Successfully added!'}, status=200)
+
+    def post(self, request, product_id):
+        try:
+            if product_id is None:
+                return JsonResponse({'error': 'Product ID is required'}, status=400)
+
+            if not request.user.is_authenticated:
+                return JsonResponse('Not logged in', status=401)
+            else:
+                product = Product.objects.get(id=product_id)
+                cart = ProductCart.objects.create(
+                    product=product,
+                    user=request.user,
+                )
+                cart.save()
+                return JsonResponse({'message': 'Successfully added!'}, status=200)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+
+    # def post(self, request, product_id):
+    #     print(product_id)
+    #     if not request.user.is_authenticated:
+    #         return JsonResponse('Not logged in', status=401)
+    #     else:
+    #         product = Product.objects.get(id=product_id)
+    #         cart = ProductCart.objects.create(
+    #             product=product,
+    #             user=request.user,
+    #         )
+    #         cart.save()
+    #         return JsonResponse({'message': 'Successfully added!'}, status=200)
 
     def delete(self, request, product_id):
         if not request.user.is_authenticated:

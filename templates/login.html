@@ -16,8 +16,8 @@
     <link rel="stylesheet" href="{% static 'css/custom.css' %}">
     {% endblock %}
     <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js "></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js "></script>
     <![endif]-->
 
 
@@ -47,11 +47,14 @@
         <form method="post">
             {% csrf_token %}
 {#            <label for="username">Username</label>#}
-{#            <input class="form-control" type="text" name="username" placeholder="Username"><br>#}
+{#            <input class="form-control" type="text" name="username" id="username" placeholder="Username"><br>#}
 {#            <label for="password">Password</label>#}
-{#            <input class="form-control" type="password" name="password" placeholder="Enter your password">#}
-            {{ form }}
+{#            <input class="form-control" type="password" name="password" id="password" placeholder="Enter your password"><br>#}
+            {{ form.as_p }}
             <button type="submit">OK</button>
+            <br/>
+            <span class="text-secondary">Don't have an account yet? <a href="/accounts/register">Sign up</a></span><br>
+            <a href="/accounts/reset-password">Forgot password?</a>
         </form>
     </div>
 {% endblock %}
@@ -65,7 +68,7 @@
     <script src="{% static 'js/jquery.superslides.min.js' %}"></script>
     <script src="{% static 'js/bootstrap-select.js' %}"></script>
     <script src="{%  static 'js/inewsticker.js' %}"></script>
-    <script src="{% static 'js/bootsnav.js.' %}"></script>
+    <script src="{% static 'js/bootsnav.js' %}"></script>
     <script src="{% static 'js/images-loded.min.js' %}"></script>
     <script src="{% static 'js/isotope.min.js' %}"></script>
     <script src="{% static 'js/owl.carousel.min.js' %}"></script>
