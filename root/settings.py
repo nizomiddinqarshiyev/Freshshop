@@ -56,6 +56,42 @@ MIDDLEWARE = [
     'main.middlewares.IPRestrictMiddleware',
 ]
 
+# settings.py
+ALLOWED_ADMIN_IPS = [
+    '127.0.0.1',
+    '172.18.0.1',
+    '255.0.0.0',
+    '255.255.255.0',
+    '10.10.3.146',
+    '192.168.145.106',
+    '10.10.3.180',
+    '192.168.100.41',
+]
+
+
+# settings.py
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'handlers': {
+#         'console': {
+#             'class': 'logging.StreamHandler',
+#         },
+#     },
+#     'loggers': {
+#         'django': {
+#             'handlers': ['console'],
+#             'level': 'DEBUG',
+#         },
+#         'your_middleware_logger': {
+#             'handlers': ['console'],
+#             'level': 'DEBUG',
+#             'propagate': True,
+#         },
+#     },
+# }
+
+
 ROOT_URLCONF = 'root.urls'
 
 TEMPLATES = [

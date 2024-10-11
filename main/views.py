@@ -207,8 +207,6 @@ class SubscribeAPIView(View):
 
 
 class AddToCartAPIView(View):
-
-
     def post(self, request, product_id):
         try:
             if product_id is None:
