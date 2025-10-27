@@ -22,7 +22,6 @@ services:
       - media_volume:/home/user/PyCharmProjects/Freshshop/media
     depends_on:
       - db
-      - elasticsearch
 
   db:
     image: postgres:15.3-alpine
